@@ -8,7 +8,6 @@ A UI demo for Z2Data Assignment
 
 **Client:** Next, React, Tanstack Table, TailwindCSS
     
-
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
