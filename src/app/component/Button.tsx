@@ -9,6 +9,7 @@ type OwnProps = {
   fill?: boolean;
   className?: string;
   isDefault?: boolean;
+  onClick?: () => void;
 };
 
 export default function Button(props: OwnProps) {
@@ -25,6 +26,7 @@ export default function Button(props: OwnProps) {
         },
         className
       )}
+      onClick={props.onClick}
     >
       {children}
     </button>
