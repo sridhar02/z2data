@@ -21,7 +21,6 @@ type OwnProps = {
 
 const Sidebar = (props: OwnProps) => {
   const { menus } = props;
-  const [openDrawer, setOpenDrawer] = useState(true);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
@@ -33,16 +32,8 @@ const Sidebar = (props: OwnProps) => {
     setActiveSubmenu(submenu);
   };
 
-  const handleDrawer = () => {
-    setOpenDrawer(!openDrawer);
-  };
-
   return (
-    <div
-      className={`flex flex-col ${
-        openDrawer ? "w-64" : " w-16"
-      } bg-[#2a384d] h-screen p-2 text-white`}
-    >
+    <div className={`flex flex-col  bg-[#2a384d] h-screen p-2 text-white`}>
       <div className="font-bold text-lg mb-6 flex w-full justify-between p-2  items-center">
         <Link href="/">
           <Image
@@ -59,7 +50,6 @@ const Sidebar = (props: OwnProps) => {
           className="h-6 w-10 text-white cursor-pointer"
           width={40}
           height={25}
-          onClick={handleDrawer}
         />
       </div>
 
