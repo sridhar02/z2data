@@ -8,19 +8,23 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   flexRender,
-  Table as TableType,
-  RowData,
 } from "@tanstack/react-table";
 import TableFooter from "./TableFooter";
 import TableHeader from "./TableHeader";
+interface RowData {
+  name: string;
+  createdBy: string;
+  modified: string;
+  created: string;
+}
 
-interface TableProps<T> {
-  data: RowData[];
+interface TableProps<T extends RowData> {
+  data: T[];
   columns: ColumnDef<T>[];
 }
 
-const Table = <T extends object>({ data, columns }: TableProps<T>) => {
-  const table = useReactTable({
+const Table = <T extends RowData>({ data, columns }: TableProps<T>) => {
+  const table = useReactTable<T>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),

@@ -5,11 +5,16 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { Table } from "@tanstack/react-table";
-import { RowData } from "../utils/data";
+interface RowData {
+  name: string;
+  createdBy: string;
+  modified: string;
+  created: string;
+}
 
-type OwnProps = {
-  table: Table<RowData>;
-  data: RowData[];
+type HeaderProps<T extends RowData> = {
+  table: Table<T>;
+  data: T[];
 };
 
 type Option = {
@@ -17,28 +22,13 @@ type Option = {
   label: string;
 };
 
-function TableHeader(props: OwnProps) {
-  const { table, data } = props;
+const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
   const [searchText, setSearchText] = useState("");
 
   const [createdByFilter, setCreatedByFilter] = useState<Option | null>(null);
   const [creationDateFilter, setCreationDateFilter] = useState<Option | null>(
     null
   );
-
-  // const createdByOptions = useMemo(() => {
-  //   const uniqueCreators = [...new Set(data.map((row) => row.createdBy))];
-  //   return uniqueCreators.map((creator) => ({
-  //     label: creator,
-  //     value: creator,
-  //   }));
-  // }, [data]);
-
-  // // Creation Date Options
-  // const creationDateOptions = useMemo(() => {
-  //   const uniqueDates = [...new Set(data.map((row) => row.creationDate))];
-  //   return uniqueDates.map((date) => ({ label: date, value: date }));
-  // }, [data]);
 
   return (
     <div className="flex gap-3 justify-between items-center p-4border-gray-300 p-4">
@@ -97,6 +87,6 @@ function TableHeader(props: OwnProps) {
       </div>
     </div>
   );
-}
+};
 
 export default TableHeader;

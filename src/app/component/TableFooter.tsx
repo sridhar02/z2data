@@ -1,15 +1,20 @@
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { Table } from "@tanstack/react-table";
-import { RowData } from "../utils/data";
 
-type OwnProps = {
-  table: Table<RowData>;
-  data: RowData[];
+interface RowData {
+  name: string;
+  createdBy: string;
+  modified: string;
+  created: string;
+}
+
+type FooterProps<T extends RowData> = {
+  table: Table<T>; // The table instance
+  data: T[]; // The row data
 };
 
-function TableFooter(props: OwnProps) {
-  const { table, data } = props;
+const TableFooter = <T extends RowData>({ table, data }: FooterProps<T>) => {
   return (
     <div className="flex items-center justify-between border-t-2 p-4 pt-8">
       <div>
@@ -59,6 +64,6 @@ function TableFooter(props: OwnProps) {
       </div>
     </div>
   );
-}
+};
 
 export default TableFooter;
