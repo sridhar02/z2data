@@ -1,101 +1,93 @@
-import Image from "next/image";
+"use client";
+
+import Table from "./component/Table";
+import { columns, data } from "./utils/data";
+import Button from "./component/Button";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 export default function Home() {
+  const items = [
+    {
+      name: "Sandbox",
+      icon: "",
+      link: "/home",
+      submenus: [
+        { name: "Folders", link: "/my-data", icon: "" },
+        { name: "BOMs", link: "/basic" },
+        { name: "Sandbox Master", link: "/strategic-sourcing" },
+        { name: "Settings", link: "/environmental-compliance" },
+      ],
+    },
+    {
+      name: "PLM Vault",
+      icon: "",
+      link: "/home",
+      submenus: [
+        { name: "Entire PLM Vault", link: "/my-data", icon: "" },
+        { name: "PLM Master", link: "/basic" },
+        { name: "Hierarchy", link: "/basic" },
+        { name: "Suplliers", link: "/strategic-sourcing" },
+        { name: "Settings", link: "/environmental-compliance" },
+      ],
+    },
+    {
+      name: "Preferred",
+      icon: "",
+      link: "/home",
+      submenus: [
+        { name: "Parts", link: "/my-data", icon: "" },
+        { name: "Suppliers", link: "/basic" },
+      ],
+    },
+  ];
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="flex flex-col h-full w-full">
+      <div className="flex justify-between gap-2 w-full items-center border-b-2 p-2">
+        <div>Part Risk Manager / My Data</div>
+        <div className="flex gap-2">
+          <Button>Saved Reports</Button>
+          <Button>Run Report</Button>
+          <Button fill>New BOM</Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+      <div className="flex h-full">
+        <div className=" p-2 w-[160px] flex gap-2 flex-col border-r-2 h-full">
+          {items.map((item, idx) => (
+            <div key={idx} className="gap-2 flex flex-col">
+              <div>{item.name}</div>
+              <div className="flex flex-col gap-2">
+                {item.submenus.map((submenu, subIdx) => (
+                  <div key={subIdx} className="ml-2">
+                    {submenu.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="w-full">
+          <TabGroup className="w-full">
+            <TabList className="p-3 flex gap-2 border-b-2 border-gray-300 w-full">
+              <Tab className="data-[selected]:underline data-[selected]:underline-blue-500 outline-none active:none">
+                All Folders
+              </Tab>
+              <Tab className="data-[selected]:underline data-[selected]:underline-blue-500 outline-none">
+                My Folders
+              </Tab>
+              <Tab className="data-[selected]:underline data-[selected]:underline-blue-500 outline-none">
+                Favorited
+              </Tab>
+            </TabList>
+            <TabPanels className="">
+              <TabPanel>
+                <Table columns={columns} data={data} />
+              </TabPanel>
+              <TabPanel>Content 2</TabPanel>
+              <TabPanel>Content 3</TabPanel>
+            </TabPanels>
+          </TabGroup>
+        </div>
+      </div>
+    </main>
   );
 }
