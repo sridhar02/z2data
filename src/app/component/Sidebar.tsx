@@ -1,17 +1,27 @@
 // export default Sidebar;
 "use client";
 
-import React, { useState } from "react";
-import {
-  HomeIcon,
-  ChartBarIcon,
-  BellIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@heroicons/react/24/outline";
 import Image from "next/image";
+import React, { useState } from "react";
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
-const Sidebar = () => {
+import { icons } from "./icons";
+import Link from "next/link";
+
+type SidebarData = {
+  name: string;
+  icon?: string;
+  link: string;
+  submenus?: SidebarData[];
+  isCategory?: boolean;
+};
+
+type OwnProps = {
+  menus: SidebarData[];
+};
+
+const Sidebar = (props: OwnProps) => {
+  const { menus } = props;
   const [openDrawer, setOpenDrawer] = useState(true);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -24,76 +34,6 @@ const Sidebar = () => {
     setActiveSubmenu(submenu);
   };
 
-  const menus = [
-    {
-      name: "Home",
-      icon: <HomeIcon className="w-5 h-5" />,
-      link: "/home",
-    },
-    {
-      name: "Part Risk Manager",
-      icon: <ChartBarIcon className="w-5 h-5" />,
-      submenus: [
-        { name: "My Data", link: "/my-data" },
-        { name: "Basic", link: "/basic" },
-        { name: "Strategic Sourcing", link: "/strategic-sourcing" },
-        { name: "Environmental Compliance", link: "/environmental-compliance" },
-        { name: "Market", link: "/market" },
-        { name: "One Risk", link: "/one-risk" },
-        { name: "Alerts", link: "/alerts" },
-      ],
-    },
-    {
-      name: "Supply Chain Watch",
-      icon: <ChartBarIcon className="w-5 h-5" />,
-      link: "/supply-chain-watch",
-    },
-    {
-      name: "Supplier Insights",
-      icon: <ChartBarIcon className="w-5 h-5" />,
-      link: "/supplier-insights",
-    },
-    {
-      name: "Reporting & Dashboards",
-      icon: <ChartBarIcon className="w-5 h-5" />,
-      link: "/reporting",
-    },
-    {
-      name: "Events & Alerts",
-      icon: <BellIcon className="w-5 h-5" />,
-      link: "/events-alerts",
-    },
-    {
-      name: "Applications",
-      isCategory: true,
-    },
-    {
-      name: "Supplier Management",
-      icon: <ChartBarIcon className="w-5 h-5 text-blue-500" />,
-      link: "/supplier-management",
-    },
-    {
-      name: "PCN Manager",
-      icon: <ChartBarIcon className="w-5 h-5 text-red-500" />,
-      link: "/pcn-manager",
-    },
-    {
-      name: "Frameworks",
-      icon: <ChartBarIcon className="w-5 h-5 text-purple-500" />,
-      link: "/frameworks",
-    },
-    {
-      name: "Traceability",
-      icon: <ChartBarIcon className="w-5 h-5 text-green-500" />,
-      link: "/traceability",
-    },
-    {
-      name: "Responsible Minerals",
-      icon: <ChartBarIcon className="w-5 h-5 text-blue-500" />,
-      link: "/responsible-minerals",
-    },
-  ];
-
   const handleDrawer = () => {
     setOpenDrawer(!openDrawer);
   };
@@ -105,11 +45,21 @@ const Sidebar = () => {
       } bg-[#2a384d] h-screen p-2 text-white`}
     >
       <div className="font-bold text-lg mb-6 flex w-full justify-between p-2  items-center">
-        <Image alt="logo" src={"./logo.webp"} className="h-[25px] w-[40px]" />
+        <Link href="/">
+          <Image
+            alt="logo"
+            src={"/logo.webp"}
+            className="h-[25px] w-[40px]"
+            width={40}
+            height={25}
+          />
+        </Link>
         <Image
           alt="drawer"
-          src={"./spliticon.svg"}
+          src={"/spliticon.svg"}
           className="h-6 w-10 text-white cursor-pointer"
+          width={40}
+          height={25}
           onClick={handleDrawer}
         />
       </div>
@@ -117,14 +67,12 @@ const Sidebar = () => {
       <ul className="flex-1 overflow-y-auto">
         {menus.map((menu, idx) => (
           <li key={idx} className="mb-4">
-            {/* Category Header */}
             {menu.isCategory ? (
               <div className="text-gray-400 uppercase text-sm tracking-wide">
                 {menu.name}
               </div>
             ) : (
               <div>
-                {/* Main Menu */}
                 <div
                   className={`flex items-center justify-between cursor-pointer ${
                     menu.submenus
@@ -136,7 +84,7 @@ const Sidebar = () => {
                   }
                 >
                   <div className="flex items-center">
-                    {menu.icon}
+                    {menu.icon && icons[menu.icon]}
                     <span className="ml-3">{menu.name}</span>
                   </div>
                   {menu.submenus && (
@@ -150,7 +98,6 @@ const Sidebar = () => {
                   )}
                 </div>
 
-                {/* Submenus */}
                 {menu.submenus && openSubMenu === menu.name && (
                   <ul className="mt-2 ml-6 border-l border-gray-600 pl-2">
                     {menu.submenus.map((submenu, subIdx) => (
