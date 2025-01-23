@@ -26,9 +26,9 @@ const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
   const [searchText, setSearchText] = useState("");
 
   const [createdByFilter, setCreatedByFilter] = useState<Option | null>(null);
-  // const [creationDateFilter, setCreationDateFilter] = useState<Option | null>(
-  //   null
-  // );
+  const [creationDateFilter, setCreationDateFilter] = useState<Option | null>(
+    null
+  );
 
   const createdByOptions = Array.from(
     new Set(data.map((row) => row.createdBy))
@@ -43,6 +43,18 @@ const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
   };
   const handleCreatedByChange = (option: Option | null) => {
     setCreatedByFilter(option);
+    table.setGlobalFilter(option?.value || "");
+  };
+
+  const creationDateOptions = Array.from(
+    new Set(data.map((row) => row.created))
+  ).map((value) => ({
+    value,
+    label: value,
+  }));
+
+  const handleCreationDateChange = (option: Option | null) => {
+    setCreationDateFilter(option);
     table.setGlobalFilter(option?.value || "");
   };
 
@@ -68,13 +80,16 @@ const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
             value={createdByFilter}
             options={createdByOptions}
             onChange={handleCreatedByChange}
+            isClearable
           />
-          {/* <Select
+          <Select
             placeholder="Creation date"
             className="w-[170px]"
             value={creationDateFilter}
-            onChange={(option) => setCreationDateFilter(option)}
-          /> */}
+            options={creationDateOptions}
+            onChange={handleCreationDateChange}
+            isClearable
+          />
         </div>
       </div>
       <div className="flex gap-2 items-center mb-2">

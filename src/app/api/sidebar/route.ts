@@ -24,11 +24,19 @@ export async function GET() {
       name: "Supply Chain Watch",
       icon: "ChartBar",
       link: "/supply-chain-watch",
+      submenus: [
+        { name: "One Risk", link: "/one-risk" },
+        { name: "Alerts", link: "/alerts" },
+      ],
     },
     {
       name: "Supplier Insights",
       icon: "ChartBar",
       link: "/supplier-insights",
+      submenus: [
+        { name: "My Data", link: "/my-data" },
+        { name: "Basic", link: "/basic" },
+      ],
     },
     {
       name: "Reporting & Dashboards",

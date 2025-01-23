@@ -1,7 +1,7 @@
 
 # Project Title
 
-A UI demo for Z2Data Assignment
+A UI demo for Z2Data Assignment, built with Next.js, React, and TailwindCSS. Used Next latest features server components , layout components, and API routes.
 
 
 ## Tech Stack

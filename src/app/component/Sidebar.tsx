@@ -82,7 +82,7 @@ const Sidebar = (props: OwnProps) => {
                     menu.submenus ? toggleSubMenu(menu.name) : null
                   }
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center mr-2">
                     {menu.icon && icons[menu.icon]}
                     <span className="ml-3">{menu.name}</span>
                   </div>
