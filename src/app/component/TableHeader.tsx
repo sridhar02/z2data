@@ -46,7 +46,6 @@ const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
           />
         </div>
         <Select
-          //   options={createdByOptions}
           placeholder="Created by"
           className="w-[140px]"
           value={createdByFilter}
@@ -54,7 +53,6 @@ const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
         />
 
         <Select
-          //   options={creationDateOptions}
           placeholder="Creation date"
           className="w-[170px]"
           value={creationDateFilter}

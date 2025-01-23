@@ -57,7 +57,7 @@ function Dashboard(props: OwnProps) {
               {TabsList.map((tab, idx) => (
                 <TabPanel
                   key={idx}
-                  className={`h-full overflow-auto ${idx === 0 ? "" : "p-2"}`}
+                  className={`h-full overflow-y-auto ${idx === 0 ? "" : "p-2"}`}
                 >
                   {tab.content}
                 </TabPanel>

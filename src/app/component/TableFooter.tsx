@@ -10,8 +10,8 @@ interface RowData {
 }
 
 type FooterProps<T extends RowData> = {
-  table: Table<T>; // The table instance
-  data: T[]; // The row data
+  table: Table<T>;
+  data: T[];
 };
 
 const TableFooter = <T extends RowData>({ table, data }: FooterProps<T>) => {

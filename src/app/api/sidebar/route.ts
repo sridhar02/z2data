@@ -4,7 +4,7 @@ export async function GET() {
   const sidebarData = [
     {
       name: "Home",
-      icon: "Home", // Reference the key in the icons map
+      icon: "Home",
       link: "/home",
     },
     {
