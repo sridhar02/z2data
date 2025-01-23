@@ -16,11 +16,11 @@ import TableHeader from "./TableHeader";
 
 interface TableProps<T> {
   data: RowData[];
-  columns: ColumnDef<RowData>[];
+  columns: ColumnDef<T>[];
 }
 
 const Table = <T extends object>({ data, columns }: TableProps<T>) => {
-  const table: TableType<RowData> = useReactTable({
+  const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
