@@ -4,11 +4,12 @@ export async function GET() {
   const sidebarData = [
     {
       name: "Home",
+      icon: "Home", // Reference the key in the icons map
       link: "/home",
-      icon: "HomeIcon", // Can map to the actual icon in the frontend
     },
     {
       name: "Part Risk Manager",
+      icon: "ChartBar",
       submenus: [
         { name: "My Data", link: "/my-data" },
         { name: "Basic", link: "/basic" },
@@ -18,17 +19,26 @@ export async function GET() {
         { name: "One Risk", link: "/one-risk" },
         { name: "Alerts", link: "/alerts" },
       ],
-      icon: "ChartBarIcon",
     },
     {
       name: "Supply Chain Watch",
+      icon: "ChartBar",
       link: "/supply-chain-watch",
-      icon: "ChartBarIcon",
     },
     {
       name: "Supplier Insights",
+      icon: "ChartBar",
       link: "/supplier-insights",
-      icon: "ChartBarIcon",
+    },
+    {
+      name: "Reporting & Dashboards",
+      icon: "ChartBar",
+      link: "/reporting",
+    },
+    {
+      name: "Events & Alerts",
+      icon: "Bell",
+      link: "/events-alerts",
     },
     {
       name: "Applications",
@@ -36,18 +46,28 @@ export async function GET() {
     },
     {
       name: "Supplier Management",
+      icon: "ChartBar",
       link: "/supplier-management",
-      icon: "ChartBarIcon",
     },
     {
       name: "PCN Manager",
+      icon: "ChartBar",
       link: "/pcn-manager",
-      icon: "ChartBarIcon",
     },
     {
       name: "Frameworks",
+      icon: "ChartBar",
       link: "/frameworks",
-      icon: "ChartBarIcon",
+    },
+    {
+      name: "Traceability",
+      icon: "ChartBar",
+      link: "/traceability",
+    },
+    {
+      name: "Responsible Minerals",
+      icon: "ChartBar",
+      link: "/responsible-minerals",
     },
   ];
 
