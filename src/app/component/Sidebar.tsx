@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 const Sidebar = () => {
+  const [openDrawer, setOpenDrawer] = useState(true);
   const [openSubMenu, setOpenSubMenu] = useState<string | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
 
@@ -92,9 +93,25 @@ const Sidebar = () => {
     },
   ];
 
+  const handleDrawer = () => {
+    setOpenDrawer(!openDrawer);
+  };
+
   return (
-    <div className="flex flex-col w-64 bg-[#2a384d] h-screen p-4 text-white">
-      <div className="font-bold text-lg mb-6">Part Risk Manager</div>
+    <div
+      className={`flex flex-col ${
+        openDrawer ? "w-64" : " w-16"
+      } bg-[#2a384d] h-screen p-2 text-white`}
+    >
+      <div className="font-bold text-lg mb-6 flex w-full justify-between p-2  items-center">
+        <img src={"./logo.webp"} className="h-[25px] w-[40px]" />
+        <img
+          src={"./spliticon.svg"}
+          className="h-6 w-10 text-white cursor-pointer"
+          onClick={handleDrawer}
+        />
+      </div>
+
       <ul className="flex-1 overflow-y-auto">
         {menus.map((menu, idx) => (
           <li key={idx} className="mb-4">
