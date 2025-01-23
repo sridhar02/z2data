@@ -26,14 +26,30 @@ const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
   const [searchText, setSearchText] = useState("");
 
   const [createdByFilter, setCreatedByFilter] = useState<Option | null>(null);
-  const [creationDateFilter, setCreationDateFilter] = useState<Option | null>(
-    null
-  );
+  // const [creationDateFilter, setCreationDateFilter] = useState<Option | null>(
+  //   null
+  // );
+
+  const createdByOptions = Array.from(
+    new Set(data.map((row) => row.createdBy))
+  ).map((value) => ({
+    value,
+    label: value,
+  }));
+
+  const handleSearch = (value: string) => {
+    setSearchText(value);
+    table.setGlobalFilter(value);
+  };
+  const handleCreatedByChange = (option: Option | null) => {
+    setCreatedByFilter(option);
+    table.setGlobalFilter(option?.value || "");
+  };
 
   return (
-    <div className="flex gap-3 justify-between items-center p-4border-gray-300 p-4">
+    <div className="flex gap-3 justify-between items-center p-4border-gray-300 p-2">
       <div className="flex items-center space-x-4 w-10/12">
-        <div className="relative mb-4 w-1/3 flex items-center">
+        <div className="relative mb-4 mt-2 w-1/3 flex items-center">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3">
             <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
           </div>
@@ -42,25 +58,26 @@ const TableHeader = <T extends RowData>({ table, data }: HeaderProps<T>) => {
             className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
             placeholder="Search by name"
             value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
-        <Select
-          placeholder="Created by"
-          className="w-[140px]"
-          value={createdByFilter}
-          onChange={(option) => setCreatedByFilter(option)}
-        />
-
-        <Select
-          placeholder="Creation date"
-          className="w-[170px]"
-          value={creationDateFilter}
-          onChange={(option) => setCreationDateFilter(option)}
-        />
+        <div className="flex items-center gap-2 mb-2 w-full">
+          <Select
+            placeholder="Created by"
+            className="w-1/2"
+            value={createdByFilter}
+            options={createdByOptions}
+            onChange={handleCreatedByChange}
+          />
+          {/* <Select
+            placeholder="Creation date"
+            className="w-[170px]"
+            value={creationDateFilter}
+            onChange={(option) => setCreationDateFilter(option)}
+          /> */}
+        </div>
       </div>
-      {/* </div> */}
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center mb-2">
         <div className="w-[150px]">
           {table.getState().pagination.pageIndex + 1}-{table.getPageCount()} of{" "}
           {data.length} results

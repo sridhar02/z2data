@@ -37,7 +37,7 @@ function Dashboard(props: OwnProps) {
     },
   ];
   return (
-    <main className="flex flex-col h-screen w-full">
+    <main className="flex flex-col h-screen w-full rounded-t-md">
       <PageHeader />
       <div className="flex h-full">
         <PageSidebar />

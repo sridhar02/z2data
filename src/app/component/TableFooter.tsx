@@ -16,7 +16,7 @@ type FooterProps<T extends RowData> = {
 
 const TableFooter = <T extends RowData>({ table, data }: FooterProps<T>) => {
   return (
-    <div className="flex items-center justify-between border-t-2 p-4 pt-8">
+    <div className="flex items-center justify-between border-t-2 p-2 px-4 pb-3">
       <div>
         Viewing {table.getState().pagination.pageIndex + 1} -{" "}
         {table.getPageCount()} of {data.length} results
