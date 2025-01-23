@@ -8,17 +8,19 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   flexRender,
+  Table as TableType,
+  RowData,
 } from "@tanstack/react-table";
 import TableFooter from "./TableFooter";
 import TableHeader from "./TableHeader";
 
 interface TableProps<T> {
-  data: T[];
-  columns: ColumnDef<T>[];
+  data: RowData[];
+  columns: ColumnDef<RowData>[];
 }
 
 const Table = <T extends object>({ data, columns }: TableProps<T>) => {
-  const table = useReactTable({
+  const table: TableType<RowData> = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -32,9 +34,9 @@ const Table = <T extends object>({ data, columns }: TableProps<T>) => {
   });
 
   return (
-    <div className="">
+    <div className="flex flex-col">
       <TableHeader table={table} data={data} />
-      <table className="min-w-full table-auto border-collapse border border-gray-300">
+      <table className="min-w-full table-auto border-collapse border border-gray-300 flex-1 overflow-y-auto">
         <thead className="bg-gray-100">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>

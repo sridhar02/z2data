@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextRequest, NextResponse } from "next/server";
 
-const data = {
+const data: SidebarData = {
   dashboard: [
     { name: "Overview", link: "/dashboard/overview" },
     { name: "Reports", link: "/dashboard/reports" },
@@ -12,18 +13,19 @@ const data = {
   ],
 };
 
-export async function GET(
-  request: Request,
-  { params }: { params: { slug: string } }
-) {
-  const { slug } = params;
+type SidebarData = {
+  [key: string]: { name: string; link: string }[];
+};
 
-  if (!slug || !data[slug]) {
+export async function GET(request: NextRequest, context: any) {
+  const { slug } = context.params;
+
+  if (!slug || (!data[slug] as any)) {
     return NextResponse.json(
       { error: "Sidebar data not found for this slug" },
       { status: 404 }
     );
   }
 
-  return NextResponse.json(data?.[slug]);
+  return NextResponse.json(data[slug] as any);
 }

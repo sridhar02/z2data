@@ -19,7 +19,6 @@ export default function Button(props: OwnProps) {
       className={classNames(
         {
           "bg-[#2a384d] text-white": fill,
-          "bg-white text-[#2a384d]": !fill,
         },
         {
           "px-6 py-2 rounded-md text-sm border-2 border-gray-300": isDefault,

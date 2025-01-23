@@ -3,7 +3,7 @@ import Select from "react-select";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Table } from "@tanstack/react-table";
 import { RowData } from "../utils/data";
 
@@ -26,19 +26,19 @@ function TableHeader(props: OwnProps) {
     null
   );
 
-  const createdByOptions = useMemo(() => {
-    const uniqueCreators = [...new Set(data.map((row) => row.createdBy))];
-    return uniqueCreators.map((creator) => ({
-      label: creator,
-      value: creator,
-    }));
-  }, [data]);
+  // const createdByOptions = useMemo(() => {
+  //   const uniqueCreators = [...new Set(data.map((row) => row.createdBy))];
+  //   return uniqueCreators.map((creator) => ({
+  //     label: creator,
+  //     value: creator,
+  //   }));
+  // }, [data]);
 
-  // Creation Date Options
-  const creationDateOptions = useMemo(() => {
-    const uniqueDates = [...new Set(data.map((row) => row.creationDate))];
-    return uniqueDates.map((date) => ({ label: date, value: date }));
-  }, [data]);
+  // // Creation Date Options
+  // const creationDateOptions = useMemo(() => {
+  //   const uniqueDates = [...new Set(data.map((row) => row.creationDate))];
+  //   return uniqueDates.map((date) => ({ label: date, value: date }));
+  // }, [data]);
 
   return (
     <div className="flex gap-3 justify-between items-center p-4border-gray-300 p-4">

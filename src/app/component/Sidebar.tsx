@@ -9,6 +9,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const Sidebar = () => {
   const [openDrawer, setOpenDrawer] = useState(true);
@@ -104,8 +105,9 @@ const Sidebar = () => {
       } bg-[#2a384d] h-screen p-2 text-white`}
     >
       <div className="font-bold text-lg mb-6 flex w-full justify-between p-2  items-center">
-        <img src={"./logo.webp"} className="h-[25px] w-[40px]" />
-        <img
+        <Image alt="logo" src={"./logo.webp"} className="h-[25px] w-[40px]" />
+        <Image
+          alt="drawer"
           src={"./spliticon.svg"}
           className="h-6 w-10 text-white cursor-pointer"
           onClick={handleDrawer}
