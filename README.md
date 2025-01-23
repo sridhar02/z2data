@@ -5,9 +5,10 @@ A UI demo for Z2Data Assignment, built with Next.js, React, and TailwindCSS. Use
 
 ## Missed features
 
-- checkbox for table
-- Name & createdBy sorting
-- header & column for three dot menu
+- checkbox for table.
+- Name & createdBy sorting.
+- header & column for three dot menu.
+- tabs styles for blue color missed it.
 
 ## Tech Stack
 
